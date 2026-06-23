@@ -72,9 +72,9 @@ TXT    oc2co.com      v=spf1 include:spf.privateemail.com ~all
 - Never proxy email-related records: `mail`, `autoconfig`, `autodiscover`, `MX`, `TXT`, `SRV`.
 - Later optional review: decide whether to proxy only web records after GitHub Pages/custom domain behavior is checked.
 
-## GREEN / YELLOW — BBWAAS Sidecar
+## GREEN — BBWAAS Sidecar / MCP
 
-**Status:** V1 prototype created locally and Chrome extension loaded, but functional actions depend on local MCP server on port `8787`.
+**Status:** V1 prototype is loaded as a Chrome extension and the first button click has been verified by the user.
 
 **Local path:**
 
@@ -82,20 +82,37 @@ TXT    oc2co.com      v=spf1 include:spf.privateemail.com ~all
 C:\Users\Sagou\Documents\BrainHub\bbwaas_sidecar_panel
 ```
 
-**Observed files:**
+**Verified files:**
 
 ```text
 manifest.json
+background.js
 README.md
 sidepanel.html
-background.js may have been added manually if manifest references it
+sidepanel.js
+sidepanel.backup.inline-js-20260623-163951.html
+```
+
+**Patch completed:**
+
+- Removed inline `onclick=` handlers from `sidepanel.html`.
+- Moved inline JavaScript into `sidepanel.js`.
+- `sidepanel.html` now loads `sidepanel.js` with `<script src="sidepanel.js"></script>`.
+- Chrome extension was reloaded.
+- User confirmed a button worked after reload.
+
+**Backend verification:**
+
+```powershell
+curl.exe http://localhost:8787/api/gate-in
+# Returned JSON with active_lane, pin_board, source_of_truth, agent_workspace, grok_version, timestamp.
 ```
 
 **Purpose:**
 
 - Original local-first BBWAAS browser side panel.
 - Not Sider-branded, not proprietary-cloned.
-- Intended to route actions through local MCP and BrainHub/AGENT_WORKSPACE.
+- Routes actions through local MCP and BrainHub/AGENT_WORKSPACE.
 
 **V1 functions:**
 
@@ -105,53 +122,32 @@ background.js may have been added manually if manifest references it
 - Iris Dashboard / Command Room links
 - Compose Packet
 
-**Current blocker:**
-
-Sidecar buttons are nonfunctional unless the local MCP server is running:
-
-```powershell
-Test-NetConnection localhost -Port 8787
-```
-
-If false, start MCP from canonical path:
-
-```powershell
-cd C:\Users\Sagou\Documents\BrainHub\bbwaas_mcp_server
-node server.js
-```
-
-If `server.js` is not found:
-
-```powershell
-Get-ChildItem C:\Users\Sagou\Documents\BrainHub -Recurse -Filter server.js | Select-Object FullName
-```
-
 ## Current Priority Stack
 
 1. **Preserve and stabilize public site** — done/green.
 2. **Use Cloudflare as DNS control plane** — done/green.
 3. **Avoid Namecheap hosting lock-in** — done operationally; cPanel backup still worth checking.
-4. **Finish Sidecar MCP functionality** — next local step.
-5. **Pin/organize current state across BBWAAS system** — this file is the GitHub proof/pin update.
+4. **Finish Sidecar packet-write verification** — active next local step.
+5. **Update local BrainHub pin/source files** — needed because local MCP gate-in is still reading older 2026-06-15 pin content.
 
 ## Next Recommended Work Packet
 
 ```text
-BBWAAS WORK ORDER — SIDECAR MCP VERIFY 01
+BBWAAS WORK ORDER — SIDECAR PACKET VERIFY 01
 
 MODE:
 LOCAL ONLY. NO SECRETS. NO API SPEND.
 
 GOAL:
-Make BBWAAS Sidecar buttons functional by confirming the local MCP server is running on localhost:8787 and that sidepanel.html calls the correct endpoints.
+Verify that BBWAAS Sidecar can write a real packet into AGENT_WORKSPACE/PACKETS through the local MCP create_packet flow.
 
 CHECKS:
-1. Test-NetConnection localhost -Port 8787
-2. Invoke-WebRequest http://localhost:8787/healthz
-3. Start server from canonical BrainHub path if needed
-4. Click GATE IN in Sidecar
-5. Write one test packet through composer
-6. Confirm packet lands in AGENT_WORKSPACE/PACKETS
+1. Open BBWAAS Sidecar in Chrome.
+2. Click GATE IN and confirm visible status updates.
+3. Use composer with title: SIDECAR_USER_VERIFY_20260623.
+4. Body: Sidecar button patch complete. Gate-in works from Chrome extension and MCP is reachable on localhost:8787. Cloudflare DNS migration is complete. Public site is live on GitHub Pages.
+5. Click WRITE PACKET.
+6. Confirm packet lands in AGENT_WORKSPACE/PACKETS.
 
 DO NOT:
 - Change DNS
@@ -163,4 +159,4 @@ DO NOT:
 
 ## Closeout Note
 
-The public website/domain lane is green. The remaining issue is local tooling, not DNS, not hosting, and not paid credits.
+The public website/domain lane is green. Cloudflare DNS control is green. The local MCP backend is green. Sidecar UI click behavior is now green. Next objective is packet-write verification and then syncing the local BrainHub pin board forward from the older 2026-06-15 state.
