@@ -1,0 +1,18 @@
+
+# BBWAAS sync safety ignores
+AGENT_WORKSPACE/PACKETS/TRADE_*.json
+AGENT_WORKSPACE/PACKETS/SWARM_DECISION_*.json
+AGENT_WORKSPACE/PACKETS/SWARM_EXEC_REPORT_*.json
+AGENT_WORKSPACE/PACKETS/ROUTER_DECISION_*.md
+
+# Secrets / credentials / local runtime
+.env
+.env.*
+**/.env
+**/.env.*
+**/*secret*
+**/*token*
+**/*wallet*
+**/*private-key*
+**/*.pem
+**/node_modules/
