@@ -74,7 +74,7 @@ TXT    oc2co.com      v=spf1 include:spf.privateemail.com ~all
 
 ## GREEN — BBWAAS Sidecar / MCP
 
-**Status:** V1 prototype is loaded as a Chrome extension and the first button click has been verified by the user.
+**Status:** V1 is now installed, clickable, connected to local MCP, and verified writing packets into `AGENT_WORKSPACE/PACKETS`.
 
 **Local path:**
 
@@ -108,6 +108,16 @@ curl.exe http://localhost:8787/api/gate-in
 # Returned JSON with active_lane, pin_board, source_of_truth, agent_workspace, grok_version, timestamp.
 ```
 
+**Packet-write verification:**
+
+User confirmed `AGENT_WORKSPACE/PACKETS` contains new Sidecar verification packets:
+
+```text
+SIDECAR_SIDECAR_USER_VERIFY_20260623_1782247510211.md
+SIDECAR_SIDECAR_USER_VERIFY_20260623_1782247557523.md
+SIDECAR_TEST_VERIFY_1782230525930.md
+```
+
 **Purpose:**
 
 - Original local-first BBWAAS browser side panel.
@@ -121,42 +131,53 @@ curl.exe http://localhost:8787/api/gate-in
 - Sync Status
 - Iris Dashboard / Command Room links
 - Compose Packet
+- Write Packet
 
 ## Current Priority Stack
 
 1. **Preserve and stabilize public site** — done/green.
 2. **Use Cloudflare as DNS control plane** — done/green.
 3. **Avoid Namecheap hosting lock-in** — done operationally; cPanel backup still worth checking.
-4. **Finish Sidecar packet-write verification** — active next local step.
-5. **Update local BrainHub pin/source files** — needed because local MCP gate-in is still reading older 2026-06-15 pin content.
+4. **Sidecar packet-write verification** — done/green.
+5. **Update local BrainHub pin/source files** — next, because local MCP gate-in is still reading older 2026-06-15 pin content.
 
 ## Next Recommended Work Packet
 
 ```text
-BBWAAS WORK ORDER — SIDECAR PACKET VERIFY 01
+BBWAAS WORK ORDER — LOCAL PIN SYNC 01
 
 MODE:
-LOCAL ONLY. NO SECRETS. NO API SPEND.
+LOCAL ONLY. NO SECRETS. NO API SPEND. NO DNS CHANGES.
 
 GOAL:
-Verify that BBWAAS Sidecar can write a real packet into AGENT_WORKSPACE/PACKETS through the local MCP create_packet flow.
+Update the local BrainHub front-door / pin-board source files so MCP gate-in reflects the 2026-06-23 green state.
+
+KNOWN GREEN STATE TO SAVE LOCALLY:
+- Cloudflare DNS migration complete.
+- Namecheap is registrar/address holder only.
+- GitHub Pages free hosting confirmed live.
+- oc2co.com redirects to www.oc2co.com.
+- www.oc2co.com returns HTTP 200 from GitHub Pages.
+- OpenAI/ChatGPT MCP tunnel connected in dev mode.
+- Local MCP server on localhost:8787 responds to /api/gate-in.
+- BBWAAS Sidecar Chrome extension loads, buttons click, and packet-write into AGENT_WORKSPACE/PACKETS is verified.
 
 CHECKS:
-1. Open BBWAAS Sidecar in Chrome.
-2. Click GATE IN and confirm visible status updates.
-3. Use composer with title: SIDECAR_USER_VERIFY_20260623.
-4. Body: Sidecar button patch complete. Gate-in works from Chrome extension and MCP is reachable on localhost:8787. Cloudflare DNS migration is complete. Public site is live on GitHub Pages.
-5. Click WRITE PACKET.
-6. Confirm packet lands in AGENT_WORKSPACE/PACKETS.
+1. Read the current local pin/front-door files.
+2. Back them up before edits.
+3. Add a dated 2026-06-23 green status section.
+4. Do not delete old history unless explicitly instructed.
+5. Run curl.exe http://localhost:8787/api/gate-in after update and confirm the new state appears.
 
 DO NOT:
-- Change DNS
-- Buy hosting
-- Use API credits
-- Expose secrets
-- Add broad Chrome permissions
+- Change DNS.
+- Buy hosting.
+- Use API credits.
+- Expose secrets.
+- Add broad Chrome permissions.
+- Touch trading/wallet execution.
 ```
 
 ## Closeout Note
 
-The public website/domain lane is green. Cloudflare DNS control is green. The local MCP backend is green. Sidecar UI click behavior is now green. Next objective is packet-write verification and then syncing the local BrainHub pin board forward from the older 2026-06-15 state.
+The public website/domain lane is green. Cloudflare DNS control is green. The local MCP backend is green. Sidecar UI click behavior is green. Sidecar packet-write is green. Next objective is syncing local BrainHub pin/source files forward from the older 2026-06-15 state.
