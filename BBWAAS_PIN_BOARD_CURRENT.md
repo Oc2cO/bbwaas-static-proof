@@ -1,6 +1,6 @@
 # BBWAAS Pin Board Current
 
-_Last updated: 2026-06-23_
+_Last updated: 2026-06-25_
 
 ## GREEN — Public Website / Domain / DNS
 
@@ -133,13 +133,54 @@ SIDECAR_TEST_VERIFY_1782230525930.md
 - Compose Packet
 - Write Packet
 
+## TEMP PASS — Oc2cO Canva Visual Asset Lane
+
+**Status:** Canva/GPT Visual Studio Worker generated visual candidate previews and saved the inventory packet to git.
+
+**Saved packet:**
+
+```text
+AGENT_WORKSPACE/PACKETS/OC2CO_CANVA_VISUAL_ASSET_STATUS_20260625.md
+```
+
+**Scope saved:**
+
+- Checkout background scene candidates.
+- Checkout liquid-glass card/button style-board candidates.
+- Homepage hero cosmic-origin candidates.
+- Oc2cO orbital double-O logo/brand-mark candidates.
+- MemTool Memory Atrium project-card candidates.
+- SellThis AI listing-pack project-card candidates.
+- Store/payment secure-glass visual candidates.
+
+**Important lane boundaries:**
+
+- No website code was touched.
+- No deploy was performed.
+- No payment logic, Stripe/session/backend logic, DNS, wallets, or secrets were touched.
+- Canva candidates are references only until Steven chooses winners and exports are created.
+- Background visuals must sit behind UI, preserve checkout readability, and never block clicks.
+
+**Current selected Canva candidate observed:**
+
+```text
+OC2CO_CHECKOUT_CARD_LIQUID_GLASS_V01 / OC2CO_CHECKOUT_BUTTON_ELECTRIC_TEXT_V01
+Candidate: dg-dc51880d-3825-4739-98d4-ecc942575e2c
+URL: https://www.canva.com/d/xNSZq4GBtaJp2Y9
+```
+
+**Next visual decision:**
+
+Choose the checkout background winner first, because it has the highest trust/readability/conversion risk.
+
 ## Current Priority Stack
 
 1. **Preserve and stabilize public site** — done/green.
 2. **Use Cloudflare as DNS control plane** — done/green.
 3. **Avoid Namecheap hosting lock-in** — done operationally; cPanel backup still worth checking.
 4. **Sidecar packet-write verification** — done/green.
-5. **Update local BrainHub pin/source files** — next, because local MCP gate-in is still reading older 2026-06-15 pin content.
+5. **Oc2cO Canva visual asset inventory** — saved/TEMP PASS; Steven must choose winners before export/implementation.
+6. **Update local BrainHub pin/source files** — next, because local MCP gate-in is still reading older 2026-06-15 pin content.
 
 ## Next Recommended Work Packet
 
@@ -150,9 +191,9 @@ MODE:
 LOCAL ONLY. NO SECRETS. NO API SPEND. NO DNS CHANGES.
 
 GOAL:
-Update the local BrainHub front-door / pin-board source files so MCP gate-in reflects the 2026-06-23 green state.
+Update the local BrainHub front-door / pin-board source files so MCP gate-in reflects the 2026-06-25 green/TEMP PASS state.
 
-KNOWN GREEN STATE TO SAVE LOCALLY:
+KNOWN GREEN / TEMP PASS STATE TO SAVE LOCALLY:
 - Cloudflare DNS migration complete.
 - Namecheap is registrar/address holder only.
 - GitHub Pages free hosting confirmed live.
@@ -161,11 +202,13 @@ KNOWN GREEN STATE TO SAVE LOCALLY:
 - OpenAI/ChatGPT MCP tunnel connected in dev mode.
 - Local MCP server on localhost:8787 responds to /api/gate-in.
 - BBWAAS Sidecar Chrome extension loads, buttons click, and packet-write into AGENT_WORKSPACE/PACKETS is verified.
+- Oc2cO Canva visual asset candidate inventory saved to AGENT_WORKSPACE/PACKETS/OC2CO_CANVA_VISUAL_ASSET_STATUS_20260625.md.
+- Canva visual lane is TEMP PASS only; no assets are final/live/exported until Steven chooses winners.
 
 CHECKS:
 1. Read the current local pin/front-door files.
 2. Back them up before edits.
-3. Add a dated 2026-06-23 green status section.
+3. Add a dated 2026-06-25 green/TEMP PASS visual asset lane section.
 4. Do not delete old history unless explicitly instructed.
 5. Run curl.exe http://localhost:8787/api/gate-in after update and confirm the new state appears.
 
@@ -176,8 +219,10 @@ DO NOT:
 - Expose secrets.
 - Add broad Chrome permissions.
 - Touch trading/wallet execution.
+- Touch Stripe/payment credentials or payment session logic.
+- Deploy.
 ```
 
 ## Closeout Note
 
-The public website/domain lane is green. Cloudflare DNS control is green. The local MCP backend is green. Sidecar UI click behavior is green. Sidecar packet-write is green. Next objective is syncing local BrainHub pin/source files forward from the older 2026-06-15 state.
+The public website/domain lane is green. Cloudflare DNS control is green. The local MCP backend is green. Sidecar UI click behavior is green. Sidecar packet-write is green. The Oc2cO Canva visual asset inventory is saved/TEMP PASS. Next objective is syncing local BrainHub pin/source files forward from the older local state and choosing visual winners before export/implementation.
